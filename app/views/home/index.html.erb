@@ -1,1 +1,112 @@
-blah
+<div id="home_top">
+  <% percentage = 79 %>
+  
+  <p class="prediccion">El cielo caerá sobre nuestras cabezas con una probabilidad del <strong><%= percentage %>%</strong></p>
+  
+  <p class="aemet">
+  <%
+  aemet = case percentage
+    when 90..100 then "AEMET está sembrada hoy"
+    when 60..90 then "AEMET no lo hace mal del todo, pero podría mejorar"
+    when 40..60 then "AEMET debería dedicarse a otra cosa"
+    else "No se como AEMET se atreve a cobrar por los datos de hoy"
+  end
+  -%>
+  <%= aemet %>
+  </p>
+</div>
+
+
+<div id="home_middle">
+  
+  <div class="top5">
+    <h2>Las que mas aciertan...</h2>
+    <table class="max" cellspacing="0" cellpadding="0" class="max">
+      <thead>
+        <tr>
+          <th>Provincia</th>
+          <th><abbr title="Porcentaje de acierto de AEMET">%</abbr></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 5.times do %>
+        <tr>
+          <td>Asturias</td>
+          <td class="porcentaje">85%</td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+    
+    <h2>...y las que menos</h2>
+    <table class="min" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th>Provincia</th>
+          <th><abbr title="Porcentaje de acierto de AEMET">%</abbr></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 5.times do %>
+        <tr>
+          <td>Almería</td>
+          <td class="porcentaje">55%</td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="stats">
+    <h2>¿Qué tal ha ido AEMET en los ultimos 15 días?</h2>
+    <div id="graph_placeholder">
+    </div>
+  </div>
+</div>
+
+
+<% content_for :js do %>
+  <!--[if IE]>
+  <%= javascript_include_tag 'flot/excanvas.min' %>
+  <![endif]-->
+  
+  <%= javascript_include_tag 'flot/jquery.flot.min' %>
+  
+  
+  <script type="text/javascript" charset="utf-8">
+    (function() {
+      
+      function go_back(date,days) {
+        today = date.getDate();
+        date.setDate( today - days );
+        return date;
+      }
+      
+      
+      
+      var data = [];
+      var ticks = [];
+      
+      
+      for (var i = 0; i<15; i++) {
+        data.push([i, 50 + (Math.random() * 50)]);
+        var d = new Date;
+        var back = go_back(d, (14-i));
+
+        ticks.push([i, '' + back.getDate() + '/' + (back.getMonth()+1)]);
+      }
+      
+      
+      var plot = $.plot($('#graph_placeholder'), [{
+        label: '% aciertos',
+        data: data
+      }], {
+        xaxis: {
+          ticks: ticks
+        }
+      });
+      
+    })();
+  </script>
+
+<% end -%>
