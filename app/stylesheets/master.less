@@ -1,0 +1,98 @@
+/* Reset CSS */
+html{font:62.5% Arial, Helvetica,sans-serif;}
+body{margin:0;font-size:100%;}
+* html body{font-size:101%;}
+*:first-child+html body{font-size:101%;}
+
+h1,h2,h3,h4,h5,h6,p,pre,blockquote{margin:0;font-size:1em;}
+ul,ol,dl,dt,dd{padding:0;margin:0;}
+ul,ol{list-style:none;}
+address,cite{font-style:normal;}
+img{border:none;-ms-interpolation-mode:bicubic;}
+
+article,aside,dialog,figure,footer,header,hgroup,nav,section{display:block;}
+
+td,th{vertical-align:top;}
+caption,th{text-align:left;}
+
+form{margin:0;}
+fieldset{margin:0;padding:0;border:none;}
+legend{margin:0;padding:0;color:#000;}
+input,textarea,select{font:1em Arial,Helvetica,sans-serif;}
+textarea{overflow:auto;}
+input[type="text"]{margin:0;}
+
+.estirar:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.estirar{display:inline-block;}
+/*\*/
+.estirar{display:block;}
+* html .estirar{height:1px;}
+/**/
+.izq,.col-i{float:left;display:inline;}
+.drcha,.col-d{float:right;display:inline;}
+.table{display:table;height:1%;}
+
+
+/* variables */
+@sans_serif: 'Lucida grande', 'Lucida sans unicode', arial, helvetica, sans-serif;
+@serif:      'Georgia', 'Times new roman', serif;
+
+/* Mixins */
+.no_underline {
+    text-decoration:none;
+    :hover { text-decoration:underline; }
+}
+.hide_text {
+    overflow:hidden;
+    text-indent:-999px;
+}
+.clear_floats {
+    overflow:hidden;
+    height:1%;
+}
+
+
+/* Básicos */
+body {
+    font-family: @sans_serif;
+    background:#def;
+    width:95.1em;
+    margin:2em auto;
+}
+
+a {
+    color:#069;
+}
+
+
+/* Head */
+#head {
+    .clear_floats;
+    
+    h1 {
+        float:left;
+        font-size:2.6em;
+        line-height:1;
+    }
+    p.tagline {
+        float:left;
+        clear:left;
+        font-size:1.2em;
+    }
+    
+    p.links {
+        float:right;
+        line-height:26px;
+        font-size:1.1em;
+    }
+}
+
+
+
+/* Layout */
+
+#container {
+    margin-top:1em;
+    background:#fff;
+    padding:1.5em;
+}
