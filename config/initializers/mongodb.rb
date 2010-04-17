@@ -17,8 +17,8 @@ MongoMapper.database = "prolix-#{Rails.env}"
 # MongoMapper.ensure_indexes!
 
 # Handle passenger forking.
-if defined?(PhusionPassenger)
-   PhusionPassenger.on_event(:starting_worker_process) do |forked|
-     MongoMapper.database.connect_to_master if forked
-   end
-end
+# if defined?(PhusionPassenger)
+#    PhusionPassenger.on_event(:starting_worker_process) do |forked|
+#      MongoMapper.database.connect_to_master if forked
+#    end
+# end
