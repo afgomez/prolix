@@ -5,5 +5,5 @@ class Prediction
   key :min, Float
   key :pop, Float 
   
-  belongs_to :day
+  belongs_to :day  
 end
