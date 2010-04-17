@@ -68,7 +68,7 @@ namespace :aemet do
             #and now we create the prediction, include it and save it
             prediction = Prediction.new
             prediction.date = (Date.today)
-            prediction.pop = pop
+            prediction.pop = pop/100
             prediction.min = temp_min
             prediction.max = temp_max
 
@@ -99,7 +99,7 @@ namespace :aemet do
       region.cities.each do |city|
 
         #we obtain or create this day for the city
-        day = city.days.select { |d| d.date == (Date.today -1) }
+        day = city.days.select { |d| d.date == (Date.today - 1) }
         day = day[0]
 
         if day.nil?
@@ -107,18 +107,20 @@ namespace :aemet do
           city.days << day
           day.save
           city.save
+          puts day.date
         end
 
         info = doc_region.xpath("//table[@class='tabla_datos']/tbody/tr[th = '#{city.name}']/td")
 
         puts " - #{city.name}"
 
-        salida =  "#{Date.today-1}\t#{info[2].content.to_f}\t#{info[0].content.to_f}\t#{info[1].content.to_f}\n"
+        salida =  "#{day.date}\t#{info[2].content.to_f}\t#{info[0].content.to_f}\t#{info[1].content.to_f}\n"
 
         #we check if we already have a summary prediction
         summary = day.observations.select { |o| o.hour.nil? }
         summary = summary[0]
         if summary.nil?
+          #now we save the summary
           summary = Observation.new(
                :max => info[0].content.to_f,
                :min => info[1].content.to_f,
@@ -126,6 +128,9 @@ namespace :aemet do
           day.observations << summary
           summary.save
           day.save
+
+          #and now we compare all the predictions with this last observation
+          day.predictions.each do |p| p.evaluate summary end
         end
 
         #And now we create the day of today
@@ -164,19 +169,15 @@ namespace :aemet do
               observation.save
               day.save
 
-            end
+              #and now we compare all the predictions with this observation
+              day.predictions.each do |p| p.evaluate observation end
 
-            
+            end  
           end
 
         end
-
         puts salida
       end
     end
   end
-end
-
-def process_observation
-  puts "a"
 end
