@@ -57,34 +57,77 @@ body {
     font-family: @sans_serif;
     background:#bcf;
     width:95.1em;
-    margin:2em auto;
+    margin:1em auto 2em;
 }
 
 a {
     color:#069;
 }
 
+.el_adivino {
+    position:absolute;
+    left:-70px;
+    top:-95px;
+    z-index:10;
+}
+
+#container {
+    position:relative;
+}
 
 /* Head */
 #head {
     .clear_floats;
-    
-    h1 {
+    padding:5.5em 0 1.5em 14em;
+    background:url(../images/bg_head.png) no-repeat 0 bottom;
+    #logo-area {
         float:left;
-        font-size:2.6em;
+        margin-top:1em;
+    }
+    h1 {
+        font-size:4em;
+        letter-spacing:-0.05em;
+        color:;
         line-height:1;
     }
     p.tagline {
-        float:left;
-        clear:left;
         font-size:1.2em;
     }
-    
-    p.links {
+        
+    #search {
         float:right;
-        line-height:26px;
-        font-size:1.1em;
+        background:rgba(255, 255, 255, 0.3);
+        padding:1.5em;
+        .clear_floats;
+        
+        label {
+            font-size:1.1em;
+            margin:0 0 .5em;
+            color:#2c2c2c;
+            display:block;
+        }
+        input.text {
+            vertical-align:top;
+            border:1px solid #bbb;
+            font-size:1.4em;
+            color:#666;
+            padding:.3em;
+            width:20em;
+        }
+        input.submit {
+            vertical-align:top;
+            color:#fff;
+            background:#09c;
+            border:0;
+            font-size:1.2em;
+            font-weight:bold;
+            text-transform:uppercase;
+            padding:5px 1em;
+        }
+        
+        
     }
+    
 }
 
 
@@ -92,9 +135,8 @@ a {
 /* Layout */
 
 #container {
-    margin-top:1em;
     background:#fff;
-    padding:1.5em;
+    padding:0 1.5em 1.5em;
 }
 
 
@@ -107,10 +149,12 @@ a {
 
 #home_top {
     .clear_floats;
+    margin:0 -1.5em;
+    
+    background:#eee;
     
     .prediccion {
-        background:#eee;
-        padding:.5em 5.5em .5em .5em;
+        padding:.6em 5.5em .6em .6em;
         float:left;
         font-size:2.4em;
         position:relative;
@@ -131,7 +175,7 @@ a {
         font-size:1.5em;
         color:#666;
         font-style:italic;
-        margin:1em 0 0 1em;
+        margin:1.5em 0 0 1em;
         
     }
 }
