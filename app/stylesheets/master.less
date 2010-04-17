@@ -55,36 +55,79 @@ input[type="text"]{margin:0;}
 /* Básicos */
 body {
     font-family: @sans_serif;
-    background:#def;
+    background:#bcf;
     width:95.1em;
-    margin:2em auto;
+    margin:1em auto 2em;
 }
 
 a {
     color:#069;
 }
 
+.el_adivino {
+    position:absolute;
+    left:-70px;
+    top:-95px;
+    z-index:10;
+}
+
+#container {
+    position:relative;
+}
 
 /* Head */
 #head {
     .clear_floats;
-    
-    h1 {
+    padding:5.5em 0 1.5em 14em;
+    background:url(../images/bg_head.png) no-repeat 0 bottom;
+    #logo-area {
         float:left;
-        font-size:2.6em;
+        margin-top:1em;
+    }
+    h1 {
+        font-size:4em;
+        letter-spacing:-0.05em;
+        color:;
         line-height:1;
     }
     p.tagline {
-        float:left;
-        clear:left;
         font-size:1.2em;
     }
-    
-    p.links {
+        
+    #search {
         float:right;
-        line-height:26px;
-        font-size:1.1em;
+        background:rgba(255, 255, 255, 0.3);
+        padding:1.5em;
+        .clear_floats;
+        
+        label {
+            font-size:1.1em;
+            margin:0 0 .5em;
+            color:#2c2c2c;
+            display:block;
+        }
+        input.text {
+            vertical-align:top;
+            border:1px solid #bbb;
+            font-size:1.4em;
+            color:#666;
+            padding:.3em;
+            width:20em;
+        }
+        input.submit {
+            vertical-align:top;
+            color:#fff;
+            background:#09c;
+            border:0;
+            font-size:1.2em;
+            font-weight:bold;
+            text-transform:uppercase;
+            padding:5px 1em;
+        }
+        
+        
     }
+    
 }
 
 
@@ -92,7 +135,150 @@ a {
 /* Layout */
 
 #container {
-    margin-top:1em;
     background:#fff;
-    padding:1.5em;
+    padding:0 1.5em 1.5em;
 }
+
+
+
+
+
+
+
+/* Home */
+
+#home_top {
+    .clear_floats;
+    margin:0 -1.5em;
+    
+    background:#eee;
+    
+    .prediccion {
+        padding:.6em 5.5em .6em .6em;
+        float:left;
+        font-size:2.4em;
+        position:relative;
+        width:18em;
+        strong {
+            font-size:3em;
+            line-height:1;
+            font-weight:normal;
+            position:absolute;
+            right:10px;
+            top:5px;
+            color:#09c;
+        }
+    }
+    .aemet {
+        float:left; display:inline;
+        width:15em;
+        font-size:1.5em;
+        color:#666;
+        font-style:italic;
+        margin:1.5em 0 0 1em;
+        
+    }
+}
+
+
+#home_middle {
+    margin-top:1.5em;
+    .clear_floats;
+    
+    h2 {
+        font-size:1.1em;
+        text-transform:uppercase;
+        font-weight:normal;
+        color:#fff;
+        background:#09c;
+        padding:.3em .6em;
+    }
+    
+    
+    .top5 {
+        float:left;
+        width:40em;
+        
+
+
+        table {
+            width:100%;
+            th {
+                color:#fff;
+                background:#212121;
+                font:1.1em Arial, Helvetica, sans-serif;
+                text-transform:uppercase;
+                padding:.3em .6em;
+                font-weight:normal;
+            }
+            abbr { border:0; }
+            td {
+                padding:.4em;
+                font-size:1.2em;
+                color:#2c2c2c;
+                border-bottom:1px solid #ddd;
+            }
+            .porcentaje {
+                width:4em;
+            }
+        }
+        table.max .porcentaje {
+            color:#060;
+        }
+        table.min .porcentaje {
+            color:#c33;
+        }
+        
+        
+    }
+
+    .stats {
+        float:right;
+        width:50em;
+        
+        #graph_placeholder {
+            margin-top:1em;
+            width:100%;
+            height:29em;
+        }
+    }
+}
+#tooltip {
+    width:10em;
+    position:absolute;
+    background:#fff;
+    -webkit-border-radius:10px;
+       -moz-border-radius:10px;
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.5);
+       -moz-box-shadow:0 0 10px rgba(0,0,0,0.5);
+    left:0;
+    top:0;
+    padding:.8em 1em;
+    font-size:1.1em;
+    
+    h3 {
+        font-size:1.1em;
+        margin-bottom:.5em;
+    }
+    dl {
+        .clear_floats;
+    }
+    dt {
+        float:left;
+        clear:left;
+        text-align:right;
+        width:5em;
+        margin-right:.5em;
+        font-weight:bold;
+    }
+    dt.max    { color:#060; }
+    dt.min    { color:#c33; }
+    dt.precip { color:#09c; }
+    dd {
+        float:left;
+        
+    }
+    
+    
+}
+
