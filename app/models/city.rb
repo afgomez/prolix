@@ -34,6 +34,18 @@ class City
     self.days.all(:order => 'date DESC', :limit => 10).map { |day| day.get_prediction_from_day(0) }.flatten
   end
 
+  def for_graph
+      require 'enumerator'
+      points = []
+
+    15.times { |i|
+        day = self.get_day_from_today(-(i+1))[0]
+        prediction = day.get_prediction_from_day(0)[0] unless prediction.nil?
+        points.push([i, prediction.score])
+    }
+    points
+  end
+
   private
 
   def make_nicetitle    
@@ -52,5 +64,4 @@ class City
       end
     end
   end
-
 end

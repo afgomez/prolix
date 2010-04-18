@@ -66,9 +66,9 @@
     // eje_y es simplemente el porcentaje para ese día
     var data = [];
     
-    for (var i = 0; i < 15; i++) {
-      data.push([i, 50 + (Math.random() * 50)]);
-    }
+    <% @city.for_graph.each do |point| %>
+      data.push([<%= point[0] %>, <%= point[1]*100 %>]);
+    <% end %>
     
   </script>
   
