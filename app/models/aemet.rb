@@ -16,7 +16,7 @@ class Aemet
     
     def for_graph      
       require 'enumerator' 
-      Aemet.all(:limit => 15).to_enum(:each_with_index).collect { |a,i| [i, a.prediction_success, prediction_tmax_success, prediction_tmin_success, prediction_pop_success] }
+      Aemet.all(:limit => 15).to_enum(:each_with_index).collect { |a,i| [i, a.prediction_success, a.prediction_tmax_success, a.prediction_tmin_success, a.prediction_pop_success] }
     end
   end  
   
