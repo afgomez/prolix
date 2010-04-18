@@ -205,8 +205,6 @@ namespace :aemet do
           aemet.prediction_tmin_success += prediction.score_min
           aemet.prediction_pop_success += prediction.score_pop
 
-
-
         end
 
         unless city.days.blank?
@@ -218,8 +216,8 @@ namespace :aemet do
               days_with_predictions += 1
             end
           end
-          city.general_prediction_success = performance/days_with_predictions
-
+          city.general_prediction_success = performance/days_with_predictions unless days_with_predictions == 0
+          city.save
         end
 
         puts "#{city.name}\t#{city.general_prediction_success}"
