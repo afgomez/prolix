@@ -10,6 +10,8 @@ namespace :aemet do
   require 'day'
   require 'prediction'
   require 'observation'
+  require 'iconv'
+  
 #    Dir[File.expand_path(File.join(File.dirname(__FILE__),"#{RAILS_ROOT}/app/models/",'**','*.rb'))].each {|f| require f}
 
 
@@ -209,6 +211,50 @@ namespace :aemet do
 
       aemet.save
       
+    end
+  end
+
+  task :load_regions do
+
+    doc = Nokogiri::HTML(open("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos"))
+
+    doc.xpath("//map[@id='Map']/area").each do |area|
+      region = Region.new
+      region.name = area.xpath("@alt")[0].to_s
+      region.aemet_key = area.xpath("@href")[0].to_s.sub("ultimosdatos?k=", "")
+
+      puts "#{region.name} #{region.aemet_key}"
+
+      region.save
+
+      area.xpath
+    end
+  end
+
+
+
+  task :load_cities do
+
+    doc = Nokogiri::HTML(open("http://www.aemet.es/es/eltiempo/prediccion/localidades"))
+
+    doc.xpath("//map[@id='map']/area").each do |area|
+
+      doc_city = Nokogiri::HTML(open("http://www.aemet.es/"+(area.xpath("@href")[0])))
+      
+      doc_city.xpath("//table[@class='tabla_datos']//tr[@class='localidades']//a[strong]").each do |a|
+        city = City.new
+
+        i = Iconv.new('UTF-8','LATIN1')
+        city.name = i.iconv(a.xpath("strong")[0].inner_html)
+        
+        city.aemet_key = a.xpath("@href")[0].to_s.sub("/es/eltiempo/prediccion/localidades/", "")
+
+        puts "#{city.name} #{city.aemet_key}"
+
+        city.save
+      end
+
+      area.xpath
     end
   end
   
