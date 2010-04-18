@@ -7,14 +7,11 @@ function go_back(date,days) {
 
 
 var tooltips = [];      
-var data = [];
 var ticks = [];
 var tooltip_tpl = '<h3>Aciertos de...</h3><dl><dt class="max">T. max:</dt><dd>{tmax} %</dd><dt class="min">T. min:</dt><dd>{tmin} %</dd><dt class="precip">Precip.:</dt><dd>{precipitaciones} %</dd></dl>';
 
 
 for (var i = 0; i<15; i++) {
-  // Data
-  data.push([i, 50 + (Math.random() * 50)]);
   
   // Máximas, minimas, precipitaciones
   tooltips.push({

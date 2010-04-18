@@ -70,5 +70,19 @@
   <%= javascript_include_tag 'flot/excanvas.min' %>
   <![endif]-->
   
+  <script type="text/javascript" charset="utf-8">
+    // Data es un array de arrays, cada item del primer array son coordenadas de la gráfica, tal que asi:
+    // [eje_x, eje_y]
+    // En nuestro caso: eje_x va de 0 a 14, siendo 0 hace 15 días; y 14 el día de ayer
+    // eje_y es simplemente el porcentaje para ese día
+    var data = [];
+    
+    for (var i = 0; i < 15; i++) {
+      data.push([i, 50 + (Math.random() * 50)]);
+    }
+    
+  </script>
+  
+  
   <%= javascript_include_tag 'flot/jquery.flot.min', 'home-chart' %>
 <% end -%>

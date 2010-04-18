@@ -36,6 +36,10 @@ input[type="text"]{margin:0;}
 /* variables */
 @sans_serif: 'Lucida grande', 'Lucida sans unicode', arial, helvetica, sans-serif;
 @serif:      'Georgia', 'Times new roman', serif;
+@max:    #c33;
+@min:    #093;
+@precip: #09c;
+
 
 /* Mixins */
 .no_underline {
@@ -50,7 +54,14 @@ input[type="text"]{margin:0;}
     overflow:hidden;
     height:1%;
 }
-
+.t {
+    font-size:1.1em;
+    text-transform:uppercase;
+    font-weight:normal;
+    color:#fff;
+    background:#09c;
+    padding:.3em .6em;
+}
 
 /* Básicos */
 body {
@@ -186,12 +197,7 @@ a {
     .clear_floats;
     
     h2 {
-        font-size:1.1em;
-        text-transform:uppercase;
-        font-weight:normal;
-        color:#fff;
-        background:#09c;
-        padding:.3em .6em;
+        .t;
     }
     
     
@@ -223,7 +229,7 @@ a {
             }
         }
         table.max .porcentaje {
-            color:#060;
+            color:#093;
         }
         table.min .porcentaje {
             color:#c33;
@@ -271,14 +277,104 @@ a {
         margin-right:.5em;
         font-weight:bold;
     }
-    dt.max    { color:#060; }
-    dt.min    { color:#c33; }
-    dt.precip { color:#09c; }
+    dt.max    { color:@max; }
+    dt.min    { color:@min; }
+    dt.precip { color:@precip; }
     dd {
         float:left;
-        
     }
-    
-    
 }
 
+/* Ficha de ciudad */
+#city {
+    
+    .cab {
+        margin:0 -1.5em;
+        background:#ddd;
+        padding:1.5em;
+        margin-bottom:1.5em;
+        
+        position:relative;
+        
+        p.date {
+            float:left;
+            margin-right:.6em;
+            font-size:2.4em;
+            span {
+                display:block;
+                text-align:center;
+                font-size:.5em;
+                text-transform:uppercase;
+                font-weight:bold;
+            }
+        }
+        
+        h2 {
+            text-align:center;
+            font-size:2.2em;
+            font-weight:normal;
+            line-height:30px;
+            strong {
+                font-weight:normal;
+                font-size:1.5em;
+                color:#09c;
+            }
+            span {
+                font-size:1.5em;
+                letter-spacing:-0.05em;
+            }
+        }
+        
+        img {
+            position:absolute;
+            top:5px;
+            right:31em;
+        }
+        
+        .prevision {
+            float:right;
+            p {
+                line-height:1;
+                font-size:1.2em;
+                text-align:center;
+                float:left; display:inline;
+                margin-left:2em;
+                span { /* Valor */
+                    display:block;
+                    margin-top:3px;
+                    
+                    font-size:2.2em;
+                    span { /* Unidad */
+                        font-size:0.5em;
+                        display:inline;
+                    }
+                }
+            }
+            .max span    { color:@max; }
+            .min span    { color:@min; }
+            .precip span { color:@precip; }
+
+        }        
+    }
+    
+    .city_middle {
+        
+        .porcentaje {
+            width:50em;
+            h3 { .t; }
+            p {
+                margin-top:.5em;
+                font-size:1.2em;
+                strong {
+                    text-align:center;
+                    line-height:1;
+                    display:block;
+                    color:#09c;
+                    font-size:8em;
+                    font-weight:normal;
+                }
+            }
+        }
+    }
+    
+}
