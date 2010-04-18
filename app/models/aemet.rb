@@ -5,12 +5,14 @@ class Aemet
   key :prediction_tmin_success, Float
   key :prediction_pop_success, Float
   key :date, Date
-  
-  class << self
 
-    def general_prediction_success
-      50
-    end
+
+
+  def prediction_success
+    (self.prediction_tmax_success + self.prediction_tmin_success + prediction_pop_success)/3
+  end
+
+  class << self
     
     def for_graph      
       require 'enumerator' 

@@ -79,9 +79,9 @@
     // eje_y es simplemente el porcentaje para ese día
     var data = [];
 
-    <% Aemet.for_graph.each | points| %>
+    <% Aemet.for_graph.each do |point| %>
       data.push([<%= point[0] %>, <%= point[1]*100 %>]);
-    <%end%>
+    <% end %>
     
   </script>
   
