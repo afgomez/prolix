@@ -1,11 +1,10 @@
-<div id="home_top">
-  <% percentage = 79 %>
+<div id="home_top"> 
   
-  <p class="prediccion">El cielo caerá sobre nuestras cabezas con una probabilidad del <strong><%= percentage %>%</strong></p>
+  <p class="prediccion">El cielo caerá sobre nuestras cabezas con una probabilidad del <strong><%= Aemet.general_prediction_success %>%</strong></p>
   
   <p class="aemet">
   <%
-  aemet = case percentage
+  aemet = case Aemet.general_prediction_success
     when 90..100 then "AEMET está sembrada hoy"
     when 60..90 then "AEMET no lo hace mal del todo, pero podría mejorar"
     when 40..60 then "AEMET debería dedicarse a otra cosa"
@@ -28,10 +27,10 @@
         </tr>
       </thead>
       <tbody>
-        <% 5.times do %>
+        <% for city in City.best do %>
         <tr>
-          <td>Asturias</td>
-          <td class="porcentaje">85%</td>
+          <td><%= city.name %></td>
+          <td class="porcentaje"><%= city.general_prediction_success %>%</td>
         </tr>
         <% end -%>
       </tbody>
@@ -46,10 +45,10 @@
         </tr>
       </thead>
       <tbody>
-        <% 5.times do %>
+       	<% for city in City.worst do %>
         <tr>
-          <td>Almería</td>
-          <td class="porcentaje">55%</td>
+          <td><%= city.name %></td>
+          <td class="porcentaje"><%= city.general_prediction_success %>%</td>
         </tr>
         <% end -%>
       </tbody>
