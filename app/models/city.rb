@@ -29,6 +29,10 @@ class City
   def to_params
     self.nicetitle
   end
+  
+  def predictions_for_view
+    self.days.all(:order => 'date DESC', :limit => 10).map { |day| day.get_prediction_from_day(0) }.flatten
+  end
 
   private
 
