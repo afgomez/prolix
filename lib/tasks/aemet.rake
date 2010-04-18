@@ -4,6 +4,7 @@ namespace :aemet do
   require 'open-uri'
   require "mongo_mapper"
   require "#{RAILS_ROOT}/config/initializers/mongodb"
+  require 'aemet'
   require 'region'
   require 'city'
   require 'day'
@@ -169,8 +170,8 @@ namespace :aemet do
               observation.save
               day.save
 
-              #and now we compare all the predictions with this observation
-              day.predictions.each do |p| p.evaluate observation end
+              # and now we compare all the predictions with this observation
+              # day.predictions.each do |p| p.evaluate observation end
 
             end  
           end
@@ -180,4 +181,35 @@ namespace :aemet do
       end
     end
   end
+
+  task :performance do
+
+    # We get or create the AEMET object
+    aemet = Aemet.all.select { |d| d.date == (Date.today - 1) }
+    aemet = aemet[0]
+
+    if aemet.nil?
+      aemet = Aemet.new
+      aemet.date = Date.today - 1
+      aemet.prediction_tmax_success = 0
+      aemet.prediction_tmin_success = 0
+      aemet.prediction_pop_success = 0
+      
+      #for each city we retrieve yesterday's last prediction
+      City.all.each do |city|
+        prediction = city.get_day_from_today(-1)[0].get_prediction_from_day(0)[0]
+        aemet.prediction_tmax_success = aemet.prediction_tmax_success + prediction.score_max
+        aemet.prediction_tmin_success += prediction.score_min
+        aemet.prediction_pop_success += prediction.score_pop
+      end
+
+      aemet.prediction_tmax_success /= City.count
+      aemet.prediction_tmin_success /= City.count
+      aemet.prediction_pop_success /= City.count
+
+      aemet.save
+      
+    end
+  end
+  
 end

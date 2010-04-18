@@ -1,9 +1,13 @@
 class Aemet
   include MongoMapper::Document
   
-  key :prediction_success, Float
+  key :prediction_tmax_success, Float
+  key :prediction_tmin_success, Float
+  key :prediction_pop_success, Float
+  key :date, Date
   
   class << self
+
     def general_prediction_success
       50
     end
