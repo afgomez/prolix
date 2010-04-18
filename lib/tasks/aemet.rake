@@ -199,18 +199,38 @@ namespace :aemet do
       
       #for each city we retrieve yesterday's last prediction
       City.all.each do |city|
-        prediction = city.get_day_from_today(-1)[0].get_prediction_from_day(0)[0]
-        aemet.prediction_tmax_success = aemet.prediction_tmax_success + prediction.score_max
-        aemet.prediction_tmin_success += prediction.score_min
-        aemet.prediction_pop_success += prediction.score_pop
+        unless city.get_day_from_today(-1)[0].nil? or city.get_day_from_today(-1)[0].get_prediction_from_day(0)[0].nil?
+          prediction = city.get_day_from_today(-1)[0].get_prediction_from_day(0)[0]
+          aemet.prediction_tmax_success = aemet.prediction_tmax_success + prediction.score_max
+          aemet.prediction_tmin_success += prediction.score_min
+          aemet.prediction_pop_success += prediction.score_pop
+
+
+          puts "AEMET\t #{aemet.prediction_tmax_success}\t#{aemet.prediction_tmin_success}\t#{aemet.prediction_pop_success}"
+          aemet.save
+
+        end
+
+        unless city.days.blank?
+          performance = -1
+          days_with_predictions = 0
+          7.times.each do |i|
+            unless city.get_day_from_today(-(i+1))[0].nil? or city.get_day_from_today(-(i+1))[0].get_prediction_from_day(0)[0].nil?
+              performance = city.get_day_from_today(-(i+1))[0].get_prediction_from_day(0)[0].score
+              days_with_predictions += 1
+            end
+          end
+          city.general_prediction_success = performance/days_with_predictions
+
+        end
+
+        puts "#{city.name}\t#{city.general_prediction_success}"
       end
 
-      aemet.prediction_tmax_success /= City.count
-      aemet.prediction_tmin_success /= City.count
-      aemet.prediction_pop_success /= City.count
 
-      aemet.save
-      
+          aemet.prediction_tmax_success /= City.count
+          aemet.prediction_tmin_success /= City.count
+          aemet.prediction_pop_success /= City.count
     end
   end
 
