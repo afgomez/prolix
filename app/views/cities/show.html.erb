@@ -1,0 +1,77 @@
+<% @body_id = 'city' %>
+
+<div class="cab estirar">
+  <h2>El <strong>75.4%</strong> de las veces AEMET acierta en <span>San miguel de la calzada</span></h2>
+  
+  
+  <!-- 
+  <%= image_tag 'previsiones/sunny.png' %>
+  
+  <div class="prevision">
+    <p class="max">
+      Máxima
+      <span>23.4<span>ºC</span></span>
+    </p>
+    <p class="min">
+      Mínima
+      <span>10<span>ºC</span></span>
+    </p>
+    <p class="precip">
+      Precipitaciones
+      <span>200<span>lm<sup>2</sup></span></span>
+    </p>
+    
+  </div> -->
+</div>
+
+
+
+<div id="home_middle">
+  <div class="top5">
+    <h2>Acierto en días anteriores</h2>
+    <table class="max" cellspacing="0" cellpadding="0" class="max">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th><abbr title="Porcentaje de acierto de AEMET">%</abbr></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 10.times do %>
+        <tr>
+          <td>19 de abril</td>
+          <td class="porcentaje">58%</td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+    
+  </div>
+  
+  <div class="stats">
+    <h2>¿Qué tal ha ido AEMET en los ultimos 15 días?</h2>
+    <div id="graph_placeholder">
+    </div>
+  </div>
+</div>
+<% content_for :js do %>
+  <!--[if IE]>
+  <%= javascript_include_tag 'flot/excanvas.min' %>
+  <![endif]-->
+  
+  <script type="text/javascript" charset="utf-8">
+    // Data es un array de arrays, cada item del primer array son coordenadas de la gráfica, tal que asi:
+    // [eje_x, eje_y]
+    // En nuestro caso: eje_x va de 0 a 14, siendo 0 hace 15 días; y 14 el día de ayer
+    // eje_y es simplemente el porcentaje para ese día
+    var data = [];
+    
+    for (var i = 0; i < 15; i++) {
+      data.push([i, 50 + (Math.random() * 50)]);
+    }
+    
+  </script>
+  
+  <%= javascript_include_tag 'flot/jquery.flot.min', 'home-chart' %>
+<% end -%>
+
