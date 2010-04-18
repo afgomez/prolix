@@ -41,7 +41,7 @@ class City
     15.times { |i|
         day = self.get_day_from_today(-(i+1))[0]
         prediction = day.get_prediction_from_day(0)[0] unless day.nil?
-        points.push([i, prediction.score]) unless prediction.nil?
+        points.push([i, prediction.score * 100]) unless prediction.nil?
     }
     points
   end

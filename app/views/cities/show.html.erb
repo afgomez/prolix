@@ -1,7 +1,7 @@
 <% @body_id = 'city' %>
 
 <div class="cab estirar">
-  <h2>El <strong><%= @city.general_prediction_success %>%</strong> de las veces AEMET acierta en <span><%= @city.name %></span></h2>
+  <h2>El <strong><%= @city.general_prediction_success * 100 %>%</strong> de las veces AEMET acierta en <span><%= @city.name %></span></h2>
   
   
   <!-- 
@@ -40,7 +40,7 @@
         <% for prediction in @city.predictions_for_view do %>
         <tr>
           <td><%= prediction.date %></td>
-          <td class="porcentaje"><%= prediction.score %>%</td>
+          <td class="porcentaje"><%= prediction.score * 100%> %</td>
         </tr>
         <% end -%>
       </tbody>
