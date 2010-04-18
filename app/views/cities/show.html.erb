@@ -65,9 +65,14 @@
     // En nuestro caso: eje_x va de 0 a 14, siendo 0 hace 15 días; y 14 el día de ayer
     // eje_y es simplemente el porcentaje para ese día
     var data = [];
-    
+    var tooltips = [];
     <% @city.for_graph.each do |point| %>
       data.push([<%= point[0] %>, <%= point[1]*100 %>]);
+      tooltips.push({
+        'tmax': <%= point[2] %>,
+        'tmin': <%= point[3] %>,
+        'precipitaciones': <%= point[4] %>
+      });
     <% end %>
     
   </script>

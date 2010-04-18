@@ -6,23 +6,15 @@ function go_back(date,days) {
 }
 
 
-var tooltips = [];      
 var ticks = [];
 var tooltip_tpl = '<h3>Aciertos de...</h3><dl><dt class="max">T. max:</dt><dd>{tmax} %</dd><dt class="min">T. min:</dt><dd>{tmin} %</dd><dt class="precip">Precip.:</dt><dd>{precipitaciones} %</dd></dl>';
 
-
-for (var i = 0; i<15; i++) {
-  
-  // Máximas, minimas, precipitaciones
-  tooltips.push({
-    'tmax': 50 + (Math.random() * 50),
-    'tmin': 50 + (Math.random() * 50),
-    'precipitaciones': 50 + (Math.random() * 50)
-  });
+var data_length = data.length;
+for (var i = 0; i < data_length; i++) {
   
   // Etiquetas de los días
   var d = new Date;
-  var back = go_back(d, (14-i));
+  var back = go_back(d, (data_length-1-i));
   ticks.push([i, '' + back.getDate() + '/' + (back.getMonth()+1)]);
 }
 
