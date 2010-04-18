@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
   end
   
   def show
-    @city = City.find_by_name(params[:id])
+    @city = City.find_by_nicetitle(params[:id])
   end
 
 end
