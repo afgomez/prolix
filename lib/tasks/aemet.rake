@@ -206,8 +206,6 @@ namespace :aemet do
           aemet.prediction_pop_success += prediction.score_pop
 
 
-          puts "AEMET\t #{aemet.prediction_tmax_success}\t#{aemet.prediction_tmin_success}\t#{aemet.prediction_pop_success}"
-          aemet.save
 
         end
 
@@ -231,6 +229,9 @@ namespace :aemet do
           aemet.prediction_tmax_success /= City.count
           aemet.prediction_tmin_success /= City.count
           aemet.prediction_pop_success /= City.count
+
+          puts "AEMET\t #{aemet.prediction_tmax_success}\t#{aemet.prediction_tmin_success}\t#{aemet.prediction_pop_success}"
+          aemet.save
     end
   end
 
