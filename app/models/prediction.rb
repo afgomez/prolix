@@ -11,7 +11,7 @@ class Prediction
   key :day_id, Mongo::ObjectID
 
   belongs_to :day
-
+  
   def score
     (self.score_max + self.score_min + self.score_pop)/3;
   end

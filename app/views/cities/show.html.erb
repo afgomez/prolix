@@ -1,7 +1,7 @@
 <% @body_id = 'city' %>
 
 <div class="cab estirar">
-  <h2>El <strong>75.4%</strong> de las veces AEMET acierta en <span>San miguel de la calzada</span></h2>
+  <h2>El <strong><%= @city.general_prediction_success %>%</strong> de las veces AEMET acierta en <span><%= @city.name %></span></h2>
   
   
   <!-- 
@@ -37,10 +37,10 @@
         </tr>
       </thead>
       <tbody>
-        <% 10.times do %>
+        <% for prediction in @city.predictions_for_view do %>
         <tr>
-          <td>19 de abril</td>
-          <td class="porcentaje">58%</td>
+          <td><%= prediction.date %></td>
+          <td class="porcentaje"><%= prediction.score %>%</td>
         </tr>
         <% end -%>
       </tbody>
