@@ -4,10 +4,9 @@
     <p class="tagline">Aquí va un tagline que se nos ocurrirá después</p>
   </div>
   
-  <form id="search">
+  <% form_tag cities_path, :method => 'get', :id => 'search' do %>
     <label>Busca tu localidad</label>
-    <input type="text" class="text" />
-    <input type="submit" value="buscar" class="submit" />
-  </form>
-  
+    <%= text_field_tag :query, @query, :class => 'text' %>
+    <%= submit_tag 'Buscar', :class => 'submit' %>
+  <% end -%>
 </div>

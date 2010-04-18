@@ -86,6 +86,12 @@ a {
     position:relative;
 }
 
+.lnk {
+    font-size:1.2em;
+    margin-top:.5em;
+    text-align:right;
+}
+
 /* Head */
 #head {
     .clear_floats;
@@ -285,12 +291,40 @@ a {
     }
 }
 
+/* Lista de ciudades */
+#cities {
+    .cab {
+        margin:0 -1.5em;
+        background:#eee;
+        padding:1.5em;
+        margin-bottom:1.5em;
+        h2 {
+            font-size:2.2em;
+            font-weight:normal;
+        }
+    }
+    
+    .cities {
+        .clear_floats;
+        
+        li {
+            margin-left:1.5em;
+            list-style:square;
+            float:left;
+            width:30%;
+            font-size:1.4em;
+            margin-bottom:.5em;
+        }
+    }
+}
+
+
 /* Ficha de ciudad */
 #city {
     
     .cab {
         margin:0 -1.5em;
-        background:#ddd;
+        background:#eee;
         padding:1.5em;
         margin-bottom:1.5em;
         

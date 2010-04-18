@@ -1,0 +1,13 @@
+<% @body_id = 'cities' %>
+
+<div class="cab">
+  <h2>Tenemos datos de las siguientes localidades <%= %{por "#{@query}"} unless @query.nil? %></h2>
+</div>
+
+<% index = 'A' %>
+<% first_with_index = false %>
+<ul class="cities">
+<% @cities.each do |city| %>
+  <li><%= link_to city, 'cities_path(city)' %></li>
+<% end -%>
+</ul>
