@@ -4,9 +4,9 @@
     <p class="tagline">Aquí va un tagline que se nos ocurrirá después</p>
   </div>
   
-  <% form_tag cities_path, :method => 'get', :id => 'search' do %>
+  <% form_tag cities_path, :method => 'get' do %>
     <label>Busca tu localidad</label>
-    <%= text_field_tag :query, @query, :class => 'text' %>
+	<%= select_tag(:id, options_for_select(City.all.map { |c| [c.name, c.nicetitle] })) %>
     <%= submit_tag 'Buscar', :class => 'submit' %>
   <% end -%>
 </div>

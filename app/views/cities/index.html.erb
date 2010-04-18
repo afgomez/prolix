@@ -7,7 +7,7 @@
 <% index = 'A' %>
 <% first_with_index = false %>
 <ul class="cities">
-<% @cities.each do |city| %>
+<% for city in @cities do %>
   <li><%= link_to city, 'cities_path(city)' %></li>
 <% end -%>
 </ul>
