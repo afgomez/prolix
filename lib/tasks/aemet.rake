@@ -232,6 +232,23 @@ namespace :aemet do
   end
 
 
+  task :load_regions do
+
+    doc = Nokogiri::HTML(open("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos"))
+
+    doc.xpath("//map[@id='Map']/area").each do |area|
+      region = Region.new
+      region.name = area.xpath("@alt")[0].to_s
+
+      puts "#{region.name} #{region.aemet_key}"
+
+      region.save
+
+      area.xpath
+    end
+  end
+
+
 
   task :load_cities do
 
@@ -257,5 +274,23 @@ namespace :aemet do
       area.xpath
     end
   end
-  
+
+  task :link_cities_regions do
+   
+       Region.all.each do |region|
+         #we download the HTML of the summary
+         doc_region = Nokogiri::HTML(open("http://www.aemet.es/es/eltiempo/observacion/ultimosdatos?k=#{region.aemet_key}&datos=det"))
+
+         City.all.each do |city|
+           unless doc_region.xpath("//table[@class='tabla_datos']/tbody/tr[th = '#{city.name}']/td").blank?
+             region.cities << city
+             city.region = region
+             region.save
+             city.save
+             puts "#{region.name} --> #{city.name}"
+           end
+         end
+
+       end
+  end
 end
